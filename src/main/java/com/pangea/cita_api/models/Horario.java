@@ -18,6 +18,7 @@ public class Horario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "horario_id")
     private Long horarioId;
 
     private Instant horaEstablecida = Instant.now();
