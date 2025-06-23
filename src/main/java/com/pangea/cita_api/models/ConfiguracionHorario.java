@@ -1,13 +1,11 @@
 package com.pangea.cita_api.models;
 
-import com.pangea.cita_api.models.enums.Dia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
