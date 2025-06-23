@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,20 +34,32 @@ public class ReservaController {
         List<ReservaResponseDTO> lista = reservaService.findAll()
                 .stream()
                 .map(reservaMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReservaResponseDTO> obtenerReserva(@PathVariable Long id) {
+    public ResponseEntity<ReservaResponseDTO> obtenerReserva(@PathVariable("id") Long id) {
         return reservaService.findById(id)
                 .map(reserva -> ResponseEntity.ok(reservaMapper.toDto(reserva)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarReserva(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarReserva(@PathVariable("id") Long id) {
         reservaService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<ReservaResponseDTO>> obtenerReservaByUserId(@PathVariable("id") Long userId){
+         List<ReservaResponseDTO> list =reservaService.findUserId(userId).stream().map(reservaMapper::toDto).toList();
+         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<ReservaResponseDTO>> obtenerReservaByDate(@PathVariable("date") Instant date){
+        List<ReservaResponseDTO> list =reservaService.findByFechaReserva(date).stream().map(reservaMapper::toDto).toList();
+        return ResponseEntity.ok(list);
     }
 }

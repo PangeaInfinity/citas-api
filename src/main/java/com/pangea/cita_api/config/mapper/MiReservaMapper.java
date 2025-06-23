@@ -2,7 +2,6 @@ package com.pangea.cita_api.config.mapper;
 
 import com.pangea.cita_api.dto.request.MiReservaRequestDTO;
 import com.pangea.cita_api.dto.response.MiReservaResponseDTO;
-import com.pangea.cita_api.models.MiReserva;
 import com.pangea.cita_api.models.Usuario;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
