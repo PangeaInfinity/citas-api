@@ -19,13 +19,12 @@ import java.util.stream.Collectors;
 public class ReservaController {
 
     private final IReservaService reservaService;
-    private final ReservaMapper reservaMapper;
 
     @PostMapping
     public ResponseEntity<ReservaResponseDTO> crearReserva(@RequestBody ReservaRequestDTO request) {
-        Reserva reserva = reservaMapper.toEntity(request);
+        Reserva reserva = ReservaMapper.toEnity(request,request.getUsuarioId(),request.getHorarioId());
         Reserva guardada = reservaService.save(reserva);
-        ReservaResponseDTO response = reservaMapper.toDto(guardada);
+        ReservaResponseDTO response = ReservaMapper.toDTO(guardada);
         return ResponseEntity.ok(response);
     }
 
@@ -33,7 +32,7 @@ public class ReservaController {
     public ResponseEntity<List<ReservaResponseDTO>> listarReservas() {
         List<ReservaResponseDTO> lista = reservaService.findAll()
                 .stream()
-                .map(reservaMapper::toDto)
+                .map(ReservaMapper::toDTO)
                 .toList();
         return ResponseEntity.ok(lista);
     }
@@ -41,7 +40,7 @@ public class ReservaController {
     @GetMapping("/{id}")
     public ResponseEntity<ReservaResponseDTO> obtenerReserva(@PathVariable("id") Long id) {
         return reservaService.findById(id)
-                .map(reserva -> ResponseEntity.ok(reservaMapper.toDto(reserva)))
+                .map(reserva -> ResponseEntity.ok(ReservaMapper.toDTO(reserva)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -53,13 +52,13 @@ public class ReservaController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<List<ReservaResponseDTO>> obtenerReservaByUserId(@PathVariable("id") Long userId){
-         List<ReservaResponseDTO> list =reservaService.findUserId(userId).stream().map(reservaMapper::toDto).toList();
+         List<ReservaResponseDTO> list =reservaService.findUserId(userId).stream().map(ReservaMapper::toDTO).toList();
          return ResponseEntity.ok(list);
     }
 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<ReservaResponseDTO>> obtenerReservaByDate(@PathVariable("date") Instant date){
-        List<ReservaResponseDTO> list =reservaService.findByFechaReserva(date).stream().map(reservaMapper::toDto).toList();
+        List<ReservaResponseDTO> list =reservaService.findByFechaReserva(date).stream().map(ReservaMapper::toDTO).toList();
         return ResponseEntity.ok(list);
     }
 }

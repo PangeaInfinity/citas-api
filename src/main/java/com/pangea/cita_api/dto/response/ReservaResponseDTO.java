@@ -1,13 +1,17 @@
 package com.pangea.cita_api.dto.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.time.Instant;
 
-public record ReservaResponseDTO(
-    Long reservaId,
-    Instant fechaReserva,
-    String consulta,
-    String name,
-    String email,
-    Instant horaEstablecida
-) {
+@Data
+@AllArgsConstructor
+public class ReservaResponseDTO{
+    private Long reservaId;
+    private Instant fechaReserva;
+    private String consulta;
+    private String name;
+    private String email;
+    private Instant horaEstablecida;
 }

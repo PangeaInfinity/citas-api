@@ -1,5 +1,7 @@
 package com.pangea.cita_api.service;
 
+import com.pangea.cita_api.dto.request.ReservaRequestDTO;
+import com.pangea.cita_api.dto.response.ReservaResponseDTO;
 import com.pangea.cita_api.models.Reserva;
 import org.springframework.data.repository.query.Param;
 
@@ -9,4 +11,6 @@ import java.util.List;
 public interface IReservaService extends ICRUDService<Reserva,Long> {
     List<Reserva> findUserId(@Param("id") Long userId);
     List<Reserva> findByFechaReserva(@Param("fecha") Instant fecha);
+
+    Reserva createReserva(ReservaRequestDTO dto);
 }

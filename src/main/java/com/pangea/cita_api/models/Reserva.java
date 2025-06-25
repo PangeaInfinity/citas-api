@@ -25,9 +25,10 @@ public class Reserva {
     @JoinColumn(name = "usuario_id",nullable = false, referencedColumnName = "usuario_id")
     private Usuario usuario;
 
+    @Column(name = "fecha_reserva")
     private Instant fechaReserva = Instant.now();
 
-    @Column(name = "consulata", length = 1024)
+    @Column(name = "consulta", length = 1024)
     private String consulta;
 
     @OneToOne
