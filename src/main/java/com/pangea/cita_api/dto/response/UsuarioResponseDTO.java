@@ -1,8 +1,9 @@
 package com.pangea.cita_api.dto.response;
 
 public record UsuarioResponseDTO(
-        String email,
-        String password,
-        String name
+        Long usuarioId,
+        String name,
+        String email
 ) {
 }
+

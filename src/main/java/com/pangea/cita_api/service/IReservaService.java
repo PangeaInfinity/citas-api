@@ -1,9 +1,9 @@
 package com.pangea.cita_api.service;
 
 import com.pangea.cita_api.dto.request.ReservaRequestDTO;
-import com.pangea.cita_api.dto.response.ReservaResponseDTO;
-import com.pangea.cita_api.models.Reserva;
 import org.springframework.data.repository.query.Param;
+import com.pangea.cita_api.models.Reserva;
+
 
 import java.time.Instant;
 import java.util.List;

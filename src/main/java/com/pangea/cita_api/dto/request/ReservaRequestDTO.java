@@ -8,15 +8,15 @@ import java.time.Instant;
 
 @Data
 public class ReservaRequestDTO {
-    @NotBlank
+    @NotNull
     private Long usuarioId;
 
-    @NotBlank
+    @NotNull
     private Long horarioId;
 
     @NotBlank
     private String consulta;
 
-    @NotBlank
+    @NotNull
     private Instant fechaReserva;
 }

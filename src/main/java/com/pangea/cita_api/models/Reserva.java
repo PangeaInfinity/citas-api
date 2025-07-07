@@ -13,7 +13,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "reservas")
+@Table(name = "reserva")
 public class Reserva {
 
     @Id
@@ -31,7 +31,7 @@ public class Reserva {
     @Column(name = "consulta", length = 1024)
     private String consulta;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "horario_id", nullable = false, referencedColumnName = "horario_id")
     private Horario horario;
 }

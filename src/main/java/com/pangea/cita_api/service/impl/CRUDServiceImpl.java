@@ -4,6 +4,7 @@ import com.pangea.cita_api.repository.IGenericRepo;
 import com.pangea.cita_api.service.ICRUDService;
 import jakarta.transaction.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,8 @@ public abstract class CRUDServiceImpl<T,ID> implements ICRUDService<T, ID> {
 
     @Override
     public List<T> findAll() {
-        return getRepo().findAll();
+        List<T> result = getRepo().findAll();
+        return result !=null ? result : Collections.emptyList();
     }
 
     @Override

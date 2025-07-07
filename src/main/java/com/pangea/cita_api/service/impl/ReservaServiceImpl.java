@@ -1,10 +1,9 @@
 package com.pangea.cita_api.service.impl;
 
 import com.pangea.cita_api.dto.request.ReservaRequestDTO;
-import com.pangea.cita_api.dto.response.ReservaResponseDTO;
 import com.pangea.cita_api.models.Horario;
-import com.pangea.cita_api.models.Reserva;
 import com.pangea.cita_api.models.Usuario;
+import com.pangea.cita_api.models.Reserva;
 import com.pangea.cita_api.repository.IGenericRepo;
 import com.pangea.cita_api.repository.IHorarioRepo;
 import com.pangea.cita_api.repository.IReservaRepo;
@@ -12,15 +11,12 @@ import com.pangea.cita_api.repository.IUsuarioRepo;
 import com.pangea.cita_api.service.IReservaService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements IReservaService {
 
     private final IReservaRepo repo;
@@ -28,6 +24,12 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements
     private final IHorarioRepo horarioRepo;
 
     private final IUsuarioRepo usuarioRepo;
+
+    public ReservaServiceImpl(IReservaRepo repo, IHorarioRepo horarioRepo, IUsuarioRepo usuarioRepo) {
+        this.repo = repo;
+        this.horarioRepo = horarioRepo;
+        this.usuarioRepo = usuarioRepo;
+    }
 
     @Override
     public List<Reserva> findUserId(Long userId) {
@@ -59,6 +61,6 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements
 
     @Override
     protected IGenericRepo<Reserva, Long> getRepo() {
-        return null;
+        return repo;
     }
 }

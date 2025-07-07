@@ -21,9 +21,7 @@ public class Horario {
     @Column(name = "horario_id")
     private Long horarioId;
 
-    private Instant horaEstablecida = Instant.now();
+    @Column(name = "hora_establecida", nullable = false)
+    private Instant horaEstablecida;
 
-    @ManyToOne
-    @JoinColumn(name = "configuracion_horario_id", nullable = false, referencedColumnName = "configuracion_horario_id")
-    private ConfiguracionHorario configuracionHorario;
 }
