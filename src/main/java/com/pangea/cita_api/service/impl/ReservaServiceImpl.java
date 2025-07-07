@@ -2,12 +2,11 @@ package com.pangea.cita_api.service.impl;
 
 import com.pangea.cita_api.dto.request.ReservaRequestDTO;
 import com.pangea.cita_api.models.Horario;
+import com.pangea.cita_api.models.Medico;
 import com.pangea.cita_api.models.Usuario;
 import com.pangea.cita_api.models.Reserva;
-import com.pangea.cita_api.repository.IGenericRepo;
-import com.pangea.cita_api.repository.IHorarioRepo;
-import com.pangea.cita_api.repository.IReservaRepo;
-import com.pangea.cita_api.repository.IUsuarioRepo;
+import com.pangea.cita_api.repository.*;
+import com.pangea.cita_api.service.IMedicoService;
 import com.pangea.cita_api.service.IReservaService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -25,10 +24,13 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements
 
     private final IUsuarioRepo usuarioRepo;
 
-    public ReservaServiceImpl(IReservaRepo repo, IHorarioRepo horarioRepo, IUsuarioRepo usuarioRepo) {
+    private final IMedicoRepo medicoRepo;
+
+    public ReservaServiceImpl(IReservaRepo repo, IHorarioRepo horarioRepo, IUsuarioRepo usuarioRepo, IMedicoRepo medicoRepo) {
         this.repo = repo;
         this.horarioRepo = horarioRepo;
         this.usuarioRepo = usuarioRepo;
+        this.medicoRepo=medicoRepo;
     }
 
     @Override
@@ -41,6 +43,11 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements
         return repo.findByFechaReserva(fecha);
     }
 
+    @Override
+    public List<Reserva> findByMedicoId(Long medicoId) {
+        return repo.findByMedicoId(medicoId);
+    }
+
     @Transactional
     @Override
     public Reserva createReserva(ReservaRequestDTO dto) {
@@ -49,6 +56,10 @@ public class ReservaServiceImpl extends CRUDServiceImpl<Reserva,Long> implements
 
         Horario horario = horarioRepo.findById(dto.getHorarioId())
                 .orElseThrow(() -> new EntityNotFoundException("Horario no encontrado con ID: " + dto.getHorarioId()));
+
+        //relation
+        Medico medico = medicoRepo.findById(dto.getMedicoId())
+                .orElseThrow(() -> new EntityNotFoundException("Médico no encontrado con ID: " + dto.getMedicoId()));
 
         Reserva reserva = new Reserva();
         reserva.setFechaReserva(dto.getFechaReserva());

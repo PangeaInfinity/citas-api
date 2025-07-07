@@ -69,4 +69,16 @@ public class ReservaController {
                 .toList();
         return ResponseEntity.ok(list);
     }
+
+    //find medic
+    @GetMapping("/medico/{id}")
+    public ResponseEntity<List<ReservaResponseDTO>> obtenerPorMedico(@PathVariable("id") Long medicoId) {
+        List<ReservaResponseDTO> lista = reservaService.findByMedicoId(medicoId)
+                .stream()
+                .map(ReservaMapper::toDTO)
+                .toList();
+
+        return ResponseEntity.ok(lista);
+    }
+
 }

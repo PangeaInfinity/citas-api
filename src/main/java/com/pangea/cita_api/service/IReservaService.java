@@ -11,6 +11,6 @@ import java.util.List;
 public interface IReservaService extends ICRUDService<Reserva,Long> {
     List<Reserva> findUserId(@Param("id") Long userId);
     List<Reserva> findByFechaReserva(@Param("fecha") Instant fecha);
-
+    List<Reserva> findByMedicoId(Long medicoId);
     Reserva createReserva(ReservaRequestDTO dto);
 }

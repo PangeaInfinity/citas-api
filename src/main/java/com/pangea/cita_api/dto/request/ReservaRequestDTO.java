@@ -19,4 +19,8 @@ public class ReservaRequestDTO {
 
     @NotNull
     private Instant fechaReserva;
+
+    //atribute
+    @NotNull
+    private Long medicoId;
 }

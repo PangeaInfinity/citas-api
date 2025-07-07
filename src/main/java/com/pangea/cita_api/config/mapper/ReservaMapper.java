@@ -3,6 +3,7 @@ package com.pangea.cita_api.config.mapper;
 import com.pangea.cita_api.dto.request.ReservaRequestDTO;
 import com.pangea.cita_api.dto.response.ReservaResponseDTO;
 import com.pangea.cita_api.models.Horario;
+import com.pangea.cita_api.models.Medico;
 import com.pangea.cita_api.models.Usuario;
 import com.pangea.cita_api.models.Reserva;
 
@@ -29,10 +30,14 @@ public class ReservaMapper {
         Usuario usuario = new Usuario();
         usuario.setUsuarioId(usuarioId);
 
+        Medico medico = new Medico();
+        medico.setMedicoId(dto.getMedicoId());
+
         reserva.setConsulta(dto.getConsulta());
         reserva.setFechaReserva(dto.getFechaReserva());
         reserva.setHorario(horario);
         reserva.setUsuario(usuario);
+        reserva.setMedico(medico);
 
         return reserva;
     }

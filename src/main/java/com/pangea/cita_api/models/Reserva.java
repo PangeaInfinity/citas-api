@@ -34,4 +34,9 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "horario_id", nullable = false, referencedColumnName = "horario_id")
     private Horario horario;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id", nullable = false, referencedColumnName = "medico_id")
+    private Medico medico;
+
 }
