@@ -7,6 +7,9 @@ import com.pangea.cita_api.models.Horario;
 import com.pangea.cita_api.service.IHorarioService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +46,19 @@ public class HorarioController {
                 .map(HorarioMapper::toDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    //  horarios disponibles de un médico (con paginado)
+    @GetMapping("/medico/{id}/disponibles")
+    public ResponseEntity<Page<HorarioResponseDTO>> obtenerHorariosDisponibles(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Horario> horarios = horarioService.obtenerHorariosDisponiblesPorMedico(id, pageable);
+
+        Page<HorarioResponseDTO> response = horarios.map(HorarioMapper::toDTO);
+        return ResponseEntity.ok(response);
     }
 }

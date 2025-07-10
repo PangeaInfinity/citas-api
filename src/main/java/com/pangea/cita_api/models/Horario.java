@@ -1,10 +1,7 @@
 package com.pangea.cita_api.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -24,4 +21,10 @@ public class Horario {
     @Column(name = "hora_establecida", nullable = false)
     private Instant horaEstablecida;
 
+    @ManyToOne
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
+
+    @Column(nullable = false)
+    private Boolean disponible;
 }
