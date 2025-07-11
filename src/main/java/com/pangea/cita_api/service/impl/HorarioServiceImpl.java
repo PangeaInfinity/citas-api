@@ -24,6 +24,7 @@ public class HorarioServiceImpl extends CRUDServiceImpl<Horario, Long> implement
 
     @Override
     public Page<Horario> obtenerHorariosDisponiblesPorMedico(Long medicoId, Pageable pageable) {
-        return repo.findByMedico_MedicoIdAndDisponibleTrue(medicoId, pageable);
+        //query nativa del repo
+        return repo.buscarHorariosDisponiblesPorMedico(medicoId, pageable);
     }
 }
